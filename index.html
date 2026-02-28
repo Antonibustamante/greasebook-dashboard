@@ -480,6 +480,30 @@ tr:hover td{background:#1c2128}
       <!-- Email: Instantly -->
       <div class="section">
         <div class="section-title">Email Outreach <span class="badge">Instantly</span></div>
+
+        <!-- GreaseBook -->
+        <div style="margin-bottom:8px;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em">GreaseBook</div>
+        <div class="email-section" style="margin-bottom:20px">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th style="text-align:right">This Week</th>
+                <th style="text-align:right">Last 4 Wks</th>
+                <th style="text-align:right">Last 90d</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Emails Sent</td><td id="gb-sent-lw" style="text-align:right">--</td><td id="gb-sent-4wk" style="text-align:right">--</td><td id="gb-sent-90d" style="text-align:right">--</td></tr>
+              <tr><td>Open Rate</td><td id="gb-open-lw" style="text-align:right">--</td><td id="gb-open-4wk" style="text-align:right">--</td><td id="gb-open-90d" style="text-align:right">--</td></tr>
+              <tr><td>Click Rate</td><td id="gb-click-lw" style="text-align:right">--</td><td id="gb-click-4wk" style="text-align:right">--</td><td id="gb-click-90d" style="text-align:right">--</td></tr>
+              <tr><td>Link Clicks</td><td id="gb-clicks-lw" style="text-align:right">--</td><td id="gb-clicks-4wk" style="text-align:right">--</td><td id="gb-clicks-90d" style="text-align:right">--</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TinyPumper -->
+        <div style="margin-bottom:8px;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em">TinyPumper</div>
         <div class="email-section">
           <table>
             <thead>
@@ -491,14 +515,13 @@ tr:hover td{background:#1c2128}
               </tr>
             </thead>
             <tbody>
-              <tr><td>Emails Sent</td><td>--</td><td>--</td><td>--</td></tr>
-              <tr><td>Open Rate</td><td>--</td><td>--</td><td>--</td></tr>
-              <tr><td>Click Rate</td><td>--</td><td>--</td><td>--</td></tr>
-              <tr><td>Link Clicks</td><td>--</td><td>--</td><td>--</td></tr>
+              <tr><td>Emails Sent</td><td id="tp-sent-lw" style="text-align:right">--</td><td id="tp-sent-4wk" style="text-align:right">--</td><td id="tp-sent-90d" style="text-align:right">--</td></tr>
+              <tr><td>Open Rate</td><td id="tp-open-lw" style="text-align:right">--</td><td id="tp-open-4wk" style="text-align:right">--</td><td id="tp-open-90d" style="text-align:right">--</td></tr>
+              <tr><td>Click Rate</td><td id="tp-click-lw" style="text-align:right">--</td><td id="tp-click-4wk" style="text-align:right">--</td><td id="tp-click-90d" style="text-align:right">--</td></tr>
+              <tr><td>Link Clicks</td><td id="tp-clicks-lw" style="text-align:right">--</td><td id="tp-clicks-4wk" style="text-align:right">--</td><td id="tp-clicks-90d" style="text-align:right">--</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="coming-soon-connect" style="margin-top:14px">🔌 Connect Instantly MCP to unlock email metrics</div>
       </div>
     </div><!-- /page-marketing -->
 
@@ -709,6 +732,10 @@ function num(n, dec) {
   if (n == null || isNaN(n)) return '--';
   if (dec != null) return n.toFixed(dec);
   return Math.round(n).toString();
+}
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
 }
 function formatDate(dateVal) {
   if (!dateVal) return '--';
@@ -1042,6 +1069,38 @@ function populateCloser(d) {
   if (sub) sub.textContent = 'Avg / week: ' + num(avgC4, 1) + ' closes (4wk) · ' + num(avgC90, 1) + ' (90d)';
 }
 
+// ── POPULATE: MARKETING ───────────────────────────────────────────────────────
+function populateMarketing(d) {
+  function pct(v) { return v != null ? (parseFloat(v) * 100).toFixed(1) + '%' : '--'; }
+  function n(v)   { return v != null ? parseInt(v).toLocaleString() : '--'; }
+
+  setText('gb-sent-lw',   n(d['gb_sent_lw']));
+  setText('gb-sent-4wk',  n(d['gb_sent_4wk']));
+  setText('gb-sent-90d',  n(d['gb_sent_90d']));
+  setText('gb-open-lw',   pct(d['gb_open_rate_lw']));
+  setText('gb-open-4wk',  pct(d['gb_open_rate_4wk']));
+  setText('gb-open-90d',  pct(d['gb_open_rate_90d']));
+  setText('gb-click-lw',  pct(d['gb_click_rate_lw']));
+  setText('gb-click-4wk', pct(d['gb_click_rate_4wk']));
+  setText('gb-click-90d', pct(d['gb_click_rate_90d']));
+  setText('gb-clicks-lw',  n(d['gb_clicks_lw']));
+  setText('gb-clicks-4wk', n(d['gb_clicks_4wk']));
+  setText('gb-clicks-90d', n(d['gb_clicks_90d']));
+
+  setText('tp-sent-lw',   n(d['tp_sent_lw']));
+  setText('tp-sent-4wk',  n(d['tp_sent_4wk']));
+  setText('tp-sent-90d',  n(d['tp_sent_90d']));
+  setText('tp-open-lw',   pct(d['tp_open_rate_lw']));
+  setText('tp-open-4wk',  pct(d['tp_open_rate_4wk']));
+  setText('tp-open-90d',  pct(d['tp_open_rate_90d']));
+  setText('tp-click-lw',  pct(d['tp_click_rate_lw']));
+  setText('tp-click-4wk', pct(d['tp_click_rate_4wk']));
+  setText('tp-click-90d', pct(d['tp_click_rate_90d']));
+  setText('tp-clicks-lw',  n(d['tp_clicks_lw']));
+  setText('tp-clicks-4wk', n(d['tp_clicks_4wk']));
+  setText('tp-clicks-90d', n(d['tp_clicks_90d']));
+}
+
 // ── RENDER TREND CHART ────────────────────────────────────────────────────────
 function renderTrend(rows) {
   const trend = buildTrendData(rows);
@@ -1118,6 +1177,7 @@ async function loadDashboard() {
     populateLeadFlow(kpi);
     populateBDR(kpi);
     populateCloser(kpi);
+    populateMarketing(kpi);
     renderTrend(rows);
 
     document.getElementById('last-updated').textContent =
