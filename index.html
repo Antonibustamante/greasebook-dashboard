@@ -636,17 +636,29 @@ tr:hover td{background:#1c2128}
         </div>
       </div>
 
-      <!-- Coming Soon: Kixie -->
+      <!-- Kixie Call Metrics -->
       <div class="section">
-        <div class="section-title">Call Activity <span class="badge">Coming soon</span></div>
-        <div class="coming-soon-block">
-          <div class="coming-soon-title">What you'll see once connected:</div>
-          <div class="coming-soon-item">📞 Calls Made (per rep, per day)</div>
-          <div class="coming-soon-item">🔗 Connection Rate (answered / dialed)</div>
-          <div class="coming-soon-item">⏱️ Avg Talk Time</div>
-          <div class="coming-soon-item">📅 Dial-to-Demo Ratio</div>
-          <div class="coming-soon-item">🎯 AI Coaching Score (from Rules Engine)</div>
-          <div class="coming-soon-connect">🔌 Connect Kixie API to unlock call metrics</div>
+        <div class="section-title" style="display:flex;align-items:center;gap:8px">
+          Call Activity (Kixie)
+          <span class="badge">Historical · auto-refreshes nightly</span>
+          <a href="https://antonibustamante.github.io/kixie-kpi/greg_report.html" target="_blank"
+             style="font-size:.72rem;color:#388bfd;margin-left:auto;text-decoration:none;white-space:nowrap">Full Detail →</a>
+        </div>
+        <table class="rep-table" style="margin-top:8px">
+          <thead>
+            <tr>
+              <th style="text-align:left">Metric</th>
+              <th>This Week</th>
+              <th>Last 4 Wks</th>
+              <th>Last 90d</th>
+            </tr>
+          </thead>
+          <tbody id="kixie-table-body">
+            <tr><td colspan="4" style="color:#484f58;text-align:center;padding:20px">Loading...</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:.68rem;color:#484f58;margin-top:10px">
+          AIC = Active In Call (20-min gap rule) &nbsp;·&nbsp; Connection rate = monthly &nbsp;·&nbsp; 90d = avg/week over ~13 weeks
         </div>
       </div>
     </div><!-- /page-bdr -->
@@ -1039,6 +1051,52 @@ function populateBDR(d) {
   if (velAvgEl) velAvgEl.textContent = velAvg ? num(velAvg, 1) + 'd' : '--';
 }
 
+// ── POPULATE: BDR KIXIE CALL METRICS ─────────────────────────────────────────
+function populateBDRKixie(d) {
+  function hr(v) { return v != null ? parseFloat(v).toFixed(1) + ' hrs' : '--'; }
+  function di(v) { return v != null ? Math.round(parseFloat(v)).toLocaleString() : '--'; }
+  function pc(v) { return v != null ? parseFloat(v).toFixed(1) + '%' : '--'; }
+  function ef(v) { return v != null ? parseFloat(v).toFixed(1) : '--'; }
+  const tb = document.getElementById('kixie-table-body');
+  if (!tb) return;
+  tb.innerHTML = `
+    <tr class="period-header"><td colspan="4">EDGAR</td></tr>
+    <tr><td>AIC Hours</td>
+        <td>${hr(d['edgar_aic_lw'])}</td>
+        <td>${hr(d['edgar_aic_4wk'])}</td>
+        <td>${hr(d['edgar_aic_90d'])}/wk</td></tr>
+    <tr><td>Dials Made</td>
+        <td>${di(d['edgar_calls_lw'])}</td>
+        <td>${di(d['edgar_calls_4wk'])}/wk</td>
+        <td>${di(d['edgar_calls_90d'])}/wk</td></tr>
+    <tr><td>Connection Rate</td>
+        <td>${pc(d['edgar_conn_lw'])}</td>
+        <td>${pc(d['edgar_conn_4wk'])}</td>
+        <td>${pc(d['edgar_conn_90d'])}</td></tr>
+    <tr><td>Dials / AIC Hour</td>
+        <td>${ef(d['edgar_eff_lw'])}</td>
+        <td>${ef(d['edgar_eff_4wk'])}</td>
+        <td>${ef(d['edgar_eff_90d'])}</td></tr>
+    <tr class="period-header"><td colspan="4">LEANDRO</td></tr>
+    <tr><td>AIC Hours</td>
+        <td>${hr(d['leandro_aic_lw'])}</td>
+        <td>${hr(d['leandro_aic_4wk'])}</td>
+        <td>${hr(d['leandro_aic_90d'])}/wk</td></tr>
+    <tr><td>Dials Made</td>
+        <td>${di(d['leandro_calls_lw'])}</td>
+        <td>${di(d['leandro_calls_4wk'])}/wk</td>
+        <td>${di(d['leandro_calls_90d'])}/wk</td></tr>
+    <tr><td>Connection Rate</td>
+        <td>${pc(d['leandro_conn_lw'])}</td>
+        <td>${pc(d['leandro_conn_4wk'])}</td>
+        <td>${pc(d['leandro_conn_90d'])}</td></tr>
+    <tr><td>Dials / AIC Hour</td>
+        <td>${ef(d['leandro_eff_lw'])}</td>
+        <td>${ef(d['leandro_eff_4wk'])}</td>
+        <td>${ef(d['leandro_eff_90d'])}</td></tr>
+  `;
+}
+
 // ── POPULATE: CLOSER ──────────────────────────────────────────────────────────
 function populateCloser(d) {
   const showsLW   = d['shows_total']   || 0;
@@ -1176,6 +1234,7 @@ async function loadDashboard() {
     populateFunnel(kpi);
     populateLeadFlow(kpi);
     populateBDR(kpi);
+    populateBDRKixie(kpi);
     populateCloser(kpi);
     populateMarketing(kpi);
     renderTrend(rows);
