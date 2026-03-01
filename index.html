@@ -799,58 +799,89 @@ tr:hover td{background:var(--bg-hover)}
     <div id="page-success" class="page">
       <div class="page-header">
         <h2>🏆 Customer Success</h2>
-        <p>Account health, retention, and expansion benchmarks. Connect data sources to unlock live tracking.</p>
+        <p>Account health, onboarding, retention, and expansion tracking. Live data sources connect progressively — benchmarks are always visible.</p>
       </div>
 
-      <!-- Account Health -->
+      <!-- ① Account Health & Risk -->
       <div class="section">
-        <div class="section-title">Account Health <span class="badge">Benchmarks TBD</span></div>
+        <div class="section-title">Account Health &amp; Risk <span class="badge">Early Warning</span></div>
         <table>
           <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
           <tbody>
-            <tr><td>Active Accounts</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>Churn Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>At-Risk Accounts</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>Active Accounts</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+            <tr><td>At-Risk Accounts <span style="font-size:0.75em;color:var(--text-muted)">(no login 30d+ or escalation open)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&lt;5% of base</td></tr>
+            <tr><td>Ghost Clients <span style="font-size:0.75em;color:var(--text-muted)">(0 activity 30d+)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">0</td></tr>
+            <tr><td>Monthly Logo Churn Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&lt;1.2%/mo</td></tr>
+            <tr><td>Annual Logo Churn Rate</td><td style="text-align:right">--</td><td style="text-align:right">14% ⚠️</td><td style="text-align:right">&lt;12%/yr</td></tr>
           </tbody>
         </table>
+        <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted)">📌 Data source: Freshbooks cancellations + Ghost Client Protocol (manual weekly CS review) · SMB SaaS best-in-class annual churn: &lt;6%</div>
       </div>
 
-      <!-- Retention & Expansion -->
+      <!-- ② Onboarding & Activation -->
       <div class="section">
-        <div class="section-title">Retention &amp; Expansion <span class="badge">Benchmarks TBD</span></div>
+        <div class="section-title">Onboarding &amp; Activation <span class="badge">Time to Value</span></div>
         <table>
           <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
           <tbody>
-            <tr><td>Retention Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>Expansion MRR</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>Upsell Conversions</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>New Accounts Onboarded</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+            <tr><td>Activation Rate (Day 30) <span style="font-size:0.75em;color:var(--text-muted)">(pumpers logging in)</span></td><td style="text-align:right">--</td><td style="text-align:right">80% ⚠️</td><td style="text-align:right">&gt;85%</td></tr>
+            <tr><td>Avg Days to First Active Use</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">≤14 days</td></tr>
+            <tr><td>Onboarding Completion %</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&gt;90%</td></tr>
+            <tr><td>Accounts Still in Setup (30d+)</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">0</td></tr>
           </tbody>
         </table>
+        <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted)">📌 Data source: Auto-Onboarding system logs · 43% of SaaS churn happens in first 90 days · Best-in-class time to value: ≤7 days</div>
       </div>
 
-      <!-- NPS / CSAT -->
+      <!-- ③ Retention & Churn -->
       <div class="section">
-        <div class="section-title">NPS / CSAT <span class="badge">Benchmarks TBD</span></div>
+        <div class="section-title">Retention &amp; Churn <span class="badge">The Scoreboard</span></div>
         <table>
           <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
           <tbody>
-            <tr><td>NPS Score</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>CSAT</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
-            <tr><td>G2 / Review Rating</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>Logo Churn Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&lt;1.2%/mo</td></tr>
+            <tr><td>MRR Churn</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&lt;2%/mo</td></tr>
+            <tr><td>Gross Revenue Retention (GRR)</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&gt;88%</td></tr>
+            <tr><td>Accounts Lost (count)</td><td style="text-align:right">--</td><td style="text-align:right">40 ⚠️</td><td style="text-align:right">—</td></tr>
+            <tr><td>Cancellations Saved <span style="font-size:0.75em;color:var(--text-muted)">(save rate)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&gt;50% save rate</td></tr>
           </tbody>
         </table>
+        <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted)">📌 Data source: Freshbooks + Cancellations SOP log · Save rate measures if the 6 retention plays in Cancellations.md are working · Best-in-class save rate: &gt;60%</div>
       </div>
 
-      <!-- Coming Soon note -->
+      <!-- ④ Expansion Revenue -->
       <div class="section">
-        <div class="coming-soon-block">
-          <div class="coming-soon-title">Next steps to activate:</div>
-          <div class="coming-soon-item">📋 Align with Greg on which benchmarks to track</div>
-          <div class="coming-soon-item">📊 Add hardcoded benchmark targets to each row</div>
-          <div class="coming-soon-item">🔌 Connect data source (Pipedrive / Stripe / custom) to fill actuals</div>
-          <div class="coming-soon-item">⚙️ Automate nightly via Make.com → Google Sheets → dashboard</div>
-        </div>
+        <div class="section-title">Expansion Revenue <span class="badge">Upsell &amp; Referral</span></div>
+        <table>
+          <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
+          <tbody>
+            <tr><td>Net Revenue Retention (NRR)</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&gt;100%</td></tr>
+            <tr><td>Expansion MRR</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+            <tr><td>PPP Referrals Active <span style="font-size:0.75em;color:var(--text-muted)">(Speed Run #4)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+            <tr><td>Upsell Conversions</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+            <tr><td>Avg Revenue Per Account (ARPA)</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted)">📌 Data source: Freshbooks MRR delta + Pipedrive PPP pipeline (unlocks when Speed Run #4 deploys) · NRR &gt;100% = growth even without new logos · SMB median NRR: 97%</div>
       </div>
+
+      <!-- ⑤ NPS / CSAT -->
+      <div class="section">
+        <div class="section-title">NPS / CSAT <span class="badge">Satisfaction</span></div>
+        <table>
+          <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
+          <tbody>
+            <tr><td>NPS Score</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">Target: 50+</td></tr>
+            <tr><td>CSAT</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">Target: &gt;4.5/5</td></tr>
+            <tr><td>G2 / Review Rating</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">Target: 4.5+</td></tr>
+            <tr><td>Detractor Count <span style="font-size:0.75em;color:var(--text-muted)">(NPS &lt;7)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">&lt;10% of base</td></tr>
+            <tr><td>PPP Eligible <span style="font-size:0.75em;color:var(--text-muted)">(score ≥8 on G2/CX call)</span></td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">—</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:8px;font-size:0.78em;color:var(--text-muted)">📌 Data source: NPS survey → Airtable (quarterly) · PPP Eligible count feeds Speed Run #4 referral pipeline directly · SMB SaaS NPS median: 41 · Best-in-class: 60+</div>
+      </div>
+
     </div><!-- /page-success -->
 
   </div><!-- /content -->
