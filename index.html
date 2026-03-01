@@ -801,7 +801,7 @@ tr:hover td{background:var(--bg-hover)}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
-const GVIZ_URL = 'https://docs.google.com/spreadsheets/d/1RfGRwfRQlwPAenslF7X6yvBT1XLC-CHm85KfqNV9SK0/gviz/tq?tqx=out:json&sheet=Dashboard+Summary';
+const GVIZ_URL = 'https://docs.google.com/spreadsheets/d/1RfGRwfRQlwPAenslF7X6yvBT1XLC-CHm85KfqNV9SK0/gviz/tq?sheet=Dashboard+Summary';
 const REFRESH_MS = 5 * 60 * 1000;
 const WEEKLY_DEMO_GOAL = 20; // Greg: update this number to change the goal bar target
 
@@ -1312,14 +1312,37 @@ function renderTrend(rows) {
   });
 }
 
+// ── JSONP LOADER (avoids CORS for GViz endpoint) ─────────────────────────────
+function fetchGVizJSONP(baseUrl) {
+  return new Promise((resolve, reject) => {
+    const cb = '__gviz_' + Date.now();
+    window[cb] = function(response) {
+      delete window[cb];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      if (response.status === 'error') {
+        reject(new Error((response.errors || [{}])[0].message || 'GViz error'));
+      } else {
+        resolve(response);
+      }
+    };
+    const script = document.createElement('script');
+    script.src = baseUrl + '&tqx=responseHandler:' + cb + '&cachebust=' + Date.now();
+    script.onerror = function() {
+      delete window[cb];
+      reject(new Error('Script load failed'));
+    };
+    document.head.appendChild(script);
+    setTimeout(function() {
+      if (window[cb]) { delete window[cb]; reject(new Error('Timeout')); }
+    }, 15000);
+  });
+}
+
 // ── MAIN LOAD ─────────────────────────────────────────────────────────────────
 async function loadDashboard() {
   try {
     document.getElementById('error-banner').style.display = 'none';
-    const res = await fetch(GVIZ_URL + '&cachebust=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    const gviz = parseGViz(text);
+    const gviz = await fetchGVizJSONP(GVIZ_URL);
     const rows = gviz.table.rows;
     const kpi  = buildKPILookup(rows);
 
