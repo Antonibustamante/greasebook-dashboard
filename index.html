@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GreaseBook · Sales Command Center</title>
+<title>GreaseBook · Command Center</title>
 <script>/* Apply saved theme before paint — prevents flash of wrong theme */
 (function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();
 </script>
@@ -346,7 +346,7 @@ tr:hover td{background:var(--bg-hover)}
   <div class="topbar-brand">
     <div class="topbar-dot"></div>
     <div>
-      <div class="topbar-title">GreaseBook · Sales Command Center</div>
+      <div class="topbar-title">GreaseBook · Command Center</div>
       <div class="topbar-sub">Live dashboard — auto-updates every 5 minutes</div>
     </div>
   </div>
@@ -858,7 +858,7 @@ tr:hover td{background:var(--bg-hover)}
 
 <!-- FOOTER -->
 <div class="footer">
-  GreaseBook Sales Command Center · Data from Google Sheets · Powered by Claude + Make.com
+  GreaseBook Command Center · Data from Google Sheets + Instantly · Powered by Claude + Make.com
 </div>
 
 <script>
@@ -1454,6 +1454,23 @@ function toggleTheme() {
 // ── BOOT ──────────────────────────────────────────────────────────────────────
 loadDashboard();
 setInterval(loadDashboard, REFRESH_MS);
+
+// ── INSTANTLY DATA (hardcoded — last pulled Feb 28, 2026 via API) ─────────────
+// Source: GB Jan 2026 + SCADA Whitepaper campaigns (GB) / TP Jan 2026 + Drip (TP)
+// TODO: automate via Make.com nightly when Speed Run #8 is wired
+(function setInstantlyData() {
+  var s = setText;
+  // GreaseBook
+  s('gb-sent-lw',   '1,800');   s('gb-sent-4wk',  '7,188');   s('gb-sent-90d',  '20,595');
+  s('gb-open-lw',   '53.5%');   s('gb-open-4wk',  '41.8%');   s('gb-open-90d',  '14.6%');
+  s('gb-click-lw',  '0.44%');   s('gb-click-4wk', '0.14%');   s('gb-click-90d', '0.17%');
+  s('gb-clicks-lw', '8');       s('gb-clicks-4wk','10');       s('gb-clicks-90d','35');
+  // TinyPumper
+  s('tp-sent-lw',   '1,587');   s('tp-sent-4wk',  '4,583');   s('tp-sent-90d',  '13,440');
+  s('tp-open-lw',   '28.6%');   s('tp-open-4wk',  '22.6%');   s('tp-open-90d',  '9.4%');
+  s('tp-click-lw',  '2.58%');   s('tp-click-4wk', '1.88%');   s('tp-click-90d', '6.92%');
+  s('tp-clicks-lw', '41');      s('tp-clicks-4wk','86');       s('tp-clicks-90d','930');
+})();
 </script>
 </body>
 </html>
