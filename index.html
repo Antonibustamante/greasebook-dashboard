@@ -1305,35 +1305,47 @@ function populateCloser(d) {
 }
 
 // ── POPULATE: MARKETING ───────────────────────────────────────────────────────
+// GViz used when available; fallback to last-known values (updated by Apps Script nightly).
+var INSTANTLY_FALLBACK = {
+  gb_sent_lw:1800,gb_sent_4wk:7182,gb_sent_90d:20584,
+  gb_open_rate_lw:0.535,gb_open_rate_4wk:0.418,gb_open_rate_90d:0.146,
+  gb_click_rate_lw:0.00444,gb_click_rate_4wk:0.00139,gb_click_rate_90d:0.0017,
+  gb_clicks_lw:8,gb_clicks_4wk:10,gb_clicks_90d:35,
+  tp_sent_lw:1587,tp_sent_4wk:4589,tp_sent_90d:13451,
+  tp_open_rate_lw:0.286,tp_open_rate_4wk:0.2258,tp_open_rate_90d:0.0938,
+  tp_click_rate_lw:0.02585,tp_click_rate_4wk:0.01874,tp_click_rate_90d:0.0692,
+  tp_clicks_lw:41,tp_clicks_4wk:86,tp_clicks_90d:930
+};
 function populateMarketing(d) {
   function pct(v) { return v != null ? (parseFloat(v) * 100).toFixed(1) + '%' : '--'; }
   function n(v)   { return v != null ? parseInt(v).toLocaleString() : '--'; }
+  function gv(k)  { return d[k] != null ? d[k] : INSTANTLY_FALLBACK[k]; }
 
-  setText('gb-sent-lw',   n(d['gb_sent_lw']));
-  setText('gb-sent-4wk',  n(d['gb_sent_4wk']));
-  setText('gb-sent-90d',  n(d['gb_sent_90d']));
-  setText('gb-open-lw',   pct(d['gb_open_rate_lw']));
-  setText('gb-open-4wk',  pct(d['gb_open_rate_4wk']));
-  setText('gb-open-90d',  pct(d['gb_open_rate_90d']));
-  setText('gb-click-lw',  pct(d['gb_click_rate_lw']));
-  setText('gb-click-4wk', pct(d['gb_click_rate_4wk']));
-  setText('gb-click-90d', pct(d['gb_click_rate_90d']));
-  setText('gb-clicks-lw',  n(d['gb_clicks_lw']));
-  setText('gb-clicks-4wk', n(d['gb_clicks_4wk']));
-  setText('gb-clicks-90d', n(d['gb_clicks_90d']));
+  setText('gb-sent-lw',   n(gv('gb_sent_lw')));
+  setText('gb-sent-4wk',  n(gv('gb_sent_4wk')));
+  setText('gb-sent-90d',  n(gv('gb_sent_90d')));
+  setText('gb-open-lw',   pct(gv('gb_open_rate_lw')));
+  setText('gb-open-4wk',  pct(gv('gb_open_rate_4wk')));
+  setText('gb-open-90d',  pct(gv('gb_open_rate_90d')));
+  setText('gb-click-lw',  pct(gv('gb_click_rate_lw')));
+  setText('gb-click-4wk', pct(gv('gb_click_rate_4wk')));
+  setText('gb-click-90d', pct(gv('gb_click_rate_90d')));
+  setText('gb-clicks-lw',  n(gv('gb_clicks_lw')));
+  setText('gb-clicks-4wk', n(gv('gb_clicks_4wk')));
+  setText('gb-clicks-90d', n(gv('gb_clicks_90d')));
 
-  setText('tp-sent-lw',   n(d['tp_sent_lw']));
-  setText('tp-sent-4wk',  n(d['tp_sent_4wk']));
-  setText('tp-sent-90d',  n(d['tp_sent_90d']));
-  setText('tp-open-lw',   pct(d['tp_open_rate_lw']));
-  setText('tp-open-4wk',  pct(d['tp_open_rate_4wk']));
-  setText('tp-open-90d',  pct(d['tp_open_rate_90d']));
-  setText('tp-click-lw',  pct(d['tp_click_rate_lw']));
-  setText('tp-click-4wk', pct(d['tp_click_rate_4wk']));
-  setText('tp-click-90d', pct(d['tp_click_rate_90d']));
-  setText('tp-clicks-lw',  n(d['tp_clicks_lw']));
-  setText('tp-clicks-4wk', n(d['tp_clicks_4wk']));
-  setText('tp-clicks-90d', n(d['tp_clicks_90d']));
+  setText('tp-sent-lw',   n(gv('tp_sent_lw')));
+  setText('tp-sent-4wk',  n(gv('tp_sent_4wk')));
+  setText('tp-sent-90d',  n(gv('tp_sent_90d')));
+  setText('tp-open-lw',   pct(gv('tp_open_rate_lw')));
+  setText('tp-open-4wk',  pct(gv('tp_open_rate_4wk')));
+  setText('tp-open-90d',  pct(gv('tp_open_rate_90d')));
+  setText('tp-click-lw',  pct(gv('tp_click_rate_lw')));
+  setText('tp-click-4wk', pct(gv('tp_click_rate_4wk')));
+  setText('tp-click-90d', pct(gv('tp_click_rate_90d')));
+  setText('tp-clicks-lw',  n(gv('tp_clicks_lw')));
+  setText('tp-clicks-4wk', n(gv('tp_clicks_4wk')));
+  setText('tp-clicks-90d', n(gv('tp_clicks_90d')));
 }
 
 // ── RENDER TREND CHART (theme-aware) ─────────────────────────────────────────
