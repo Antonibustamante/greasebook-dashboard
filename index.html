@@ -374,7 +374,7 @@ tr:hover td{background:var(--bg-hover)}
     <a class="nav-item" data-page="bdr" onclick="switchPage('bdr')">📞 BDR Activity</a>
     <a class="nav-item" data-page="closer" onclick="switchPage('closer')">🤝 Closer</a>
     <div class="nav-group-label">Success</div>
-    <a class="nav-item" data-page="success" onclick="switchPage('success')">🏆 Benchmarks</a>
+    <a class="nav-item" data-page="success" onclick="switchPage('success')">🏆 Customer Success</a>
   </nav>
 
   <!-- CONTENT -->
@@ -1416,6 +1416,7 @@ async function loadDashboard() {
     populateBDRKixie(kpi);
     populateCloser(kpi);
     populateMarketing(kpi);
+    setInstantlyData();
     lastTrendRows = rows;
     renderTrend(rows);
 
@@ -1457,8 +1458,9 @@ setInterval(loadDashboard, REFRESH_MS);
 
 // ── INSTANTLY DATA (hardcoded — last pulled Feb 28, 2026 via API) ─────────────
 // Source: GB Jan 2026 + SCADA Whitepaper campaigns (GB) / TP Jan 2026 + Drip (TP)
+// Called from loadDashboard() after populateMarketing() so GViz can't overwrite.
 // TODO: automate via Make.com nightly when Speed Run #8 is wired
-(function setInstantlyData() {
+function setInstantlyData() {
   var s = setText;
   // GreaseBook
   s('gb-sent-lw',   '1,800');   s('gb-sent-4wk',  '7,188');   s('gb-sent-90d',  '20,595');
@@ -1470,7 +1472,7 @@ setInterval(loadDashboard, REFRESH_MS);
   s('tp-open-lw',   '28.6%');   s('tp-open-4wk',  '22.6%');   s('tp-open-90d',  '9.4%');
   s('tp-click-lw',  '2.58%');   s('tp-click-4wk', '1.88%');   s('tp-click-90d', '6.92%');
   s('tp-clicks-lw', '41');      s('tp-clicks-4wk','86');       s('tp-clicks-90d','930');
-})();
+}
 </script>
 </body>
 </html>
