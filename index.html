@@ -373,6 +373,8 @@ tr:hover td{background:var(--bg-hover)}
     <div class="nav-group-label">Sales</div>
     <a class="nav-item" data-page="bdr" onclick="switchPage('bdr')">📞 BDR Activity</a>
     <a class="nav-item" data-page="closer" onclick="switchPage('closer')">🤝 Closer</a>
+    <div class="nav-group-label">Success</div>
+    <a class="nav-item" data-page="success" onclick="switchPage('success')">🏆 Benchmarks</a>
   </nav>
 
   <!-- CONTENT -->
@@ -790,6 +792,66 @@ tr:hover td{background:var(--bg-hover)}
         </div>
       </div>
     </div><!-- /page-closer -->
+
+    <!-- ══════════════════════════════════════════════════════
+         PAGE: SUCCESS
+    ══════════════════════════════════════════════════════ -->
+    <div id="page-success" class="page">
+      <div class="page-header">
+        <h2>🏆 Customer Success</h2>
+        <p>Account health, retention, and expansion benchmarks. Connect data sources to unlock live tracking.</p>
+      </div>
+
+      <!-- Account Health -->
+      <div class="section">
+        <div class="section-title">Account Health <span class="badge">Benchmarks TBD</span></div>
+        <table>
+          <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
+          <tbody>
+            <tr><td>Active Accounts</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>Churn Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>At-Risk Accounts</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Retention & Expansion -->
+      <div class="section">
+        <div class="section-title">Retention &amp; Expansion <span class="badge">Benchmarks TBD</span></div>
+        <table>
+          <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
+          <tbody>
+            <tr><td>Retention Rate</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>Expansion MRR</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>Upsell Conversions</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NPS / CSAT -->
+      <div class="section">
+        <div class="section-title">NPS / CSAT <span class="badge">Benchmarks TBD</span></div>
+        <table>
+          <thead><tr><th>Metric</th><th style="text-align:right">This Month</th><th style="text-align:right">Last 90d</th><th style="text-align:right">Benchmark</th></tr></thead>
+          <tbody>
+            <tr><td>NPS Score</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>CSAT</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+            <tr><td>G2 / Review Rating</td><td style="text-align:right">--</td><td style="text-align:right">--</td><td style="text-align:right">--</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Coming Soon note -->
+      <div class="section">
+        <div class="coming-soon-block">
+          <div class="coming-soon-title">Next steps to activate:</div>
+          <div class="coming-soon-item">📋 Align with Greg on which benchmarks to track</div>
+          <div class="coming-soon-item">📊 Add hardcoded benchmark targets to each row</div>
+          <div class="coming-soon-item">🔌 Connect data source (Pipedrive / Stripe / custom) to fill actuals</div>
+          <div class="coming-soon-item">⚙️ Automate nightly via Make.com → Google Sheets → dashboard</div>
+        </div>
+      </div>
+    </div><!-- /page-success -->
 
   </div><!-- /content -->
 </div><!-- /layout -->
